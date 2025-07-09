@@ -99,7 +99,7 @@
         // Kunci API OpenRouter Anda
         // PENTING: Untuk aplikasi produksi, jangan pernah menyimpan kunci API di sisi klien seperti ini.
         // Gunakan server backend untuk memproses permintaan API secara aman.
-        const API_KEY = "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";
+        const API_KEY = "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";
 
         // Data Cerita untuk modul terjemahan
         const storyData = {
@@ -108,9 +108,22 @@ Pelajaran di sekolah biasanya berakhir pada pukul tiga sore. Setelah sekolah, sa
 Kadang-kadang, saya juga bertemu teman-teman saya di perpustakaan untuk belajar kelompok. Kami saling membantu jika ada materi yang sulit. Setelah selesai dengan tugas sekolah, saya pun pulang ke rumah, biasanya sekitar pukul lima sore.
 Sesampainya di rumah, saya suka bermain dengan kucing saya. Kucing saya namanya Kuro. Dia sangat lucu dan suka mengejar mainan kecil. Kami sering bermain di taman belakang rumah, berlarian dan tertawa bersama. Setelah itu, saya membantu ibu menyiapkan makan malam di dapur.
 Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buku cerita petualangan dan buku tentang sains. Membaca membuat saya merasa rileks dan saya selalu belajar banyak hal baru dari setiap halaman. Terkadang, saya juga menonton televisi sebentar sebelum tidur. Lalu, saya tidur, siap untuk hari yang baru besok.`,
-            story2: `Setiap akhir pekan, saya suka pergi ke taman kota. Saya sering membawa buku dan membaca di bawah pohon besar. Kadang-kadang, saya melihat anak-anak bermain sepak bola atau keluarga piknik. Udara segar dan pemandangan hijau membuat saya merasa tenang. Sore hari, saya membeli es krim dari penjual keliling sebelum pulang.`,
-            story3: `Liburan musim panas lalu, saya mengunjungi Kyoto bersama keluarga. Kami naik kereta cepat Shinkansen. Di Kyoto, kami mengunjungi banyak kuil kuno dan taman yang indah. Kuil Kinkaku-ji dengan paviliun emasnya sangat mengesankan. Kami juga mencoba makanan lokal yang lezat seperti ramen dan takoyaki. Itu adalah pengalaman yang tak terlupakan.`,
-            story4: `Saya punya seekor anjing kecil bernama Pochi. Dia sangat aktif dan suka berlari. Setiap pagi dan sore, saya mengajaknya jalan-jalan di sekitar komplek perumahan. Pochi suka mengejar kupu-kupu dan bermain dengan anjing lain. Dia adalah teman terbaik saya dan selalu membuat saya tersenyum.`
+            story2: `まいしゅうまつ、わたしは こうえんへ いくのが すきです。
+わたしは よく ほんを もっていって、おおきな きの したで よみます。
+ときどき、こどもたちが サッカーを したり、かぞくが ピクニックを したり しているのを みます。
+しんせんな くうきと みどりの けしきは わたしを おちつかせます。
+ゆうがた、わたしは かえる まえに いどうはんばいしゃから アイスクリームを かいます。`,
+            story3: `まえの なつやすみ、わたしは かぞくと いっしょに きょうとを おとずれました。
+わたしたちは しんかんせんに のりました。
+きょうとで、わたしたちは たくさんの ふるい おてらと うつくしい にわを おとずれました。
+きんかくじの きんの ろうかくは とても いんしょうてきでした。
+わたしたちは ラーメンや たこやきのような おいしい ちほうりょうりも ためしました。
+それは わすれられない けいけん でした。`,
+            story4: `わたしには ポチという ちいさい いぬが います。
+かれは とても かっぱつで、はしるのが すきです。
+まいあさ、まいゆう、わたしは かれを じゅうたくちの まわりを さんぽに つれていきます。
+ポチは ちょうちょを おいかけたり、ほかの いぬと あそんだりするのが すきです。
+かれは わたしの さいこうの ともだちで、いつも わたしを えがおに してくれます。`
         };
 
         // Jawaban hardcode untuk setiap cerita dalam bahasa Jepang (Hiragana/Katakana saja)
@@ -288,6 +301,7 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
             // Normalisasi spasi dan baris baru untuk perbandingan yang lebih baik
             const normalizeText = (text) => text.replace(/\s+/g, ' ').trim();
 
+            // Periksa apakah jawaban siswa sama persis dengan jawaban hardcode
             if (normalizeText(userTranslation) === normalizeText(correctJapaneseAnswer)) {
                 translationFeedback.innerHTML = '<span style="color:blue;font-weight:bold;">Terjemahan Anda sangat bagus! Tidak ada kesalahan yang ditemukan.</span>';
                 return; // Hentikan eksekusi jika jawaban benar
