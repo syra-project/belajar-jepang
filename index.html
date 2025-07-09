@@ -10,8 +10,8 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light blue-gray background */
-            color: #334155; /* Darker text color */
+            background-color: #f0f4f8; /* Latar belakang biru-abu muda */
+            color: #334155; /* Warna teks lebih gelap */
         }
         .container {
             max-width: 1200px;
@@ -29,11 +29,11 @@
             resize: vertical;
             min-height: 150px;
             border-radius: 0.5rem;
-            border: 1px solid #cbd5e1; /* Gray-300 */
+            border: 1px solid #cbd5e1; /* Abu-abu-300 */
             padding: 0.75rem;
             font-size: 1rem;
             line-height: 1.5;
-            color: #1a202c; /* Gray-900 */
+            color: #1a202c; /* Abu-abu-900 */
         }
         button {
             transition: background-color 0.3s ease, transform 0.2s ease;
@@ -43,7 +43,7 @@
         }
         .loading-spinner {
             border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #3b82f6; /* Blue-500 */
+            border-left-color: #3b82f6; /* Biru-500 */
             border-radius: 50%;
             width: 24px;
             height: 24px;
@@ -83,7 +83,7 @@
             <div class="bg-green-50 p-4 rounded-lg mb-6 border border-green-200">
                 <p class="font-semibold text-green-800">Soal Cerita (Bahasa Indonesia):</p>
                 <p id="storyText" class="text-green-700 leading-relaxed">
-                    <!-- Story text will be loaded here by JavaScript -->
+                    <!-- Teks cerita akan dimuat di sini oleh JavaScript -->
                 </p>
             </div>
             <textarea id="translationInput" class="w-full mb-4 shadow-sm focus:ring-green-500 focus:border-green-500" placeholder="Tulis terjemahan bahasa Jepang Anda di sini..."></textarea>
@@ -122,10 +122,10 @@
     </div>
 
     <script>
-        // Your API Key
-        const API_KEY = "AIzaSyDZx9O-zay8DGv4S4MLFR9R_GqGB5xQI0c"; // API Key Anda
+        // Kunci API Anda
+        const API_KEY = "AIzaSyDZx9O-zay8DGv4S4MLFR9R_GqGB5xQI0c"; // Kunci API Anda
 
-        // Story Data
+        // Data Cerita
         const storyData = {
             story1: `Halo! Nama saya Rio. Saya adalah seorang siswa. Setiap pagi, saya bangun jam tujuh. Saya makan roti dan minum susu. Setelah itu, saya pergi ke sekolah. Di sekolah, saya belajar bahasa Jepang dan matematika. Guru saya sangat baik dan selalu membantu kami memahami pelajaran.
 Pelajaran di sekolah biasanya berakhir pada pukul tiga sore. Setelah sekolah, saya sering pergi ke perpustakaan sekolah. Di sana, saya menghabiskan waktu untuk membaca berbagai buku menarik atau mengerjakan pekerjaan rumah yang diberikan guru. Perpustakaan adalah tempat yang tenang dan nyaman, sangat cocok untuk belajar.
@@ -137,7 +137,7 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
             story4: `Saya punya seekor anjing kecil bernama Pochi. Dia sangat aktif dan suka berlari. Setiap pagi dan sore, saya mengajaknya jalan-jalan di sekitar komplek perumahan. Pochi suka mengejar kupu-kupu dan bermain dengan anjing lain. Dia adalah teman terbaik saya dan selalu membuat saya tersenyum.`
         };
 
-        // Get elements
+        // Dapatkan elemen-elemen
         const essayInput = document.getElementById('essayInput');
         const submitEssayButton = document.getElementById('submitEssay');
         const essayFeedback = document.getElementById('essayFeedback');
@@ -150,26 +150,26 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
         const translationFeedback = document.getElementById('translationFeedback');
         const translationLoadingSpinner = document.getElementById('translationLoadingSpinner');
 
-        // Function to load selected story
+        // Fungsi untuk memuat cerita yang dipilih
         function loadStory(storyKey) {
             storyTextDisplay.innerText = storyData[storyKey];
-            translationInput.value = ''; // Clear translation input when switching stories
-            translationFeedback.innerHTML = '<p class="text-gray-500">Hasil verifikasi terjemahan akan ditampilkan di sini.</p>'; // Clear feedback
+            translationInput.value = ''; // Hapus input terjemahan saat mengganti cerita
+            translationFeedback.innerHTML = '<p class="text-gray-500">Hasil verifikasi terjemahan akan ditampilkan di sini.</p>'; // Hapus umpan balik
         }
 
-        // Load initial story
+        // Muat cerita awal
         loadStory(storySelector.value);
 
-        // Event listener for story selector change
+        // Event listener untuk perubahan pilihan cerita
         storySelector.addEventListener('change', (event) => {
             loadStory(event.target.value);
         });
 
-        // Function to call Gemini API
+        // Fungsi untuk memanggil Gemini API
         async function callGemini(prompt, targetElement, loadingSpinner) {
             loadingSpinner.classList.remove('hidden');
             targetElement.innerHTML = '<p class="text-gray-500">Memeriksa jawaban Anda dengan AI...</p>';
-            targetElement.classList.add('animate-pulse'); // Add pulse animation
+            targetElement.classList.add('animate-pulse'); // Tambahkan animasi berkedip
 
             let chatHistory = [];
             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
@@ -195,21 +195,21 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
                     result.candidates[0].content && result.candidates[0].content.parts &&
                     result.candidates[0].content.parts.length > 0) {
                     const text = result.candidates[0].content.parts[0].text;
-                    // Sanitize and display the HTML content
+                    // Bersihkan dan tampilkan konten HTML
                     targetElement.innerHTML = text;
                 } else {
                     targetElement.innerHTML = '<p class="text-red-600">Tidak dapat memproses jawaban Anda. Respons AI tidak valid.</p>';
                 }
             } catch (error) {
-                console.error('Fetch error:', error);
+                console.error('Kesalahan pengambilan:', error);
                 targetElement.innerHTML = `<p class="text-red-600">Terjadi kesalahan jaringan atau server: ${error.message}. Silakan coba lagi.</p>`;
             } finally {
                 loadingSpinner.classList.add('hidden');
-                targetElement.classList.remove('animate-pulse'); // Remove pulse animation
+                targetElement.classList.remove('animate-pulse'); // Hapus animasi berkedip
             }
         }
 
-        // Event listener for Essay submission
+        // Event listener untuk pengiriman Esai
         submitEssayButton.addEventListener('click', () => {
             const userEssay = essayInput.value.trim();
             if (userEssay === "") {
@@ -217,9 +217,9 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
                 return;
             }
 
-            const essayPrompt = `Review this Japanese essay for grammatical errors, spelling mistakes, and unnatural phrasing. For each error, highlight it in red bold text using <span style="color:red;font-weight:bold;">...</span> tags and provide the correct version of the highlighted text within the hint, prefixed with '<span style="color:green;">Seharusnya: </span>' in parentheses immediately after the highlighted text. Ensure the hint is concise and helpful. If there are no errors, state "Esai Anda sangat bagus! Tidak ada kesalahan yang ditemukan."
+            const essayPrompt = `Tanggapan dalam bahasa Indonesia. Periksa esai bahasa Jepang ini untuk kesalahan tata bahasa, kesalahan ejaan, dan ungkapan yang tidak wajar. Untuk setiap kesalahan, sorot dengan teks merah tebal menggunakan tag <span style="color:red;font-weight:bold;">...</span> dan berikan versi yang benar dari teks yang disorot dalam bentuk petunjuk, diawali dengan <span style="color:green;">Seharusnya: </span> dalam tanda kurung tepat setelah teks yang disorot. Pastikan petunjuk tersebut singkat dan membantu. Pastikan bagian 'Seharusnya: [teks]' hanya menggunakan Hiragana dan Katakana, tanpa Kanji. Jika tidak ada kesalahan, tuliskan "Esai Anda sangat bagus! Tidak ada kesalahan yang ditemukan."
 
-            Contoh format: 私の<span style="color:red;font-weight:bold;">名前はリオです。</span> (<span style="color:green;">Seharusnya: 私の名前はリオです</span>)
+            Contoh format: 私の<span style="color:red;font-weight:bold;">名前はリオです。</span> (<span style="color:green;">Seharusnya: わたしのなまえはリオです</span>)
 
             Esai yang akan diperiksa:
             ${userEssay}`;
@@ -227,7 +227,7 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
             callGemini(essayPrompt, essayFeedback, essayLoadingSpinner);
         });
 
-        // Event listener for Translation submission
+        // Event listener untuk pengiriman Terjemahan
         submitTranslationButton.addEventListener('click', () => {
             const userTranslation = translationInput.value.trim();
             if (userTranslation === "") {
@@ -235,15 +235,13 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
                 return;
             }
 
-            const currentStoryText = storyTextDisplay.innerText; // Get the currently displayed story text
+            const currentStoryText = storyTextDisplay.innerText; // Dapatkan teks cerita yang sedang ditampilkan
 
-            const translationPrompt = `The following is an Indonesian story:\n\n${currentStoryText}\n\nHere is a Japanese translation of the story:\n\n${userTranslation}\n\nReview the Japanese translation for accuracy, grammatical errors, spelling mistakes, and unnatural phrasing compared to the original Indonesian text. For each error or inaccuracy, highlight it in red bold text using <span style="color:red;font-weight:bold;">...</span> tags and provide the correct version of the highlighted text within the hint, prefixed with '<span style="color:green;">Seharusnya: </span>' in parentheses immediately after the highlighted text. Ensure the hint is concise and helpful. If there are no errors, state "Terjemahan Anda sangat bagus! Tidak ada kesalahan yang ditemukan."
+            const translationPrompt = `Berikut adalah sebuah cerita dalam bahasa Indonesia:\n\n${currentStoryText}\n\nBerikut adalah terjemahan cerita tersebut dalam bahasa Jepang:\n\n${userTranslation}\n\nPeriksa terjemahan bahasa Jepang ini untuk keakuratan, kesalahan tata bahasa, kesalahan ejaan, dan ungkapan yang tidak wajar dibandingkan dengan teks asli dalam bahasa Indonesia. Untuk setiap kesalahan atau ketidakakuratan, sorot dengan teks merah tebal menggunakan tag <span style="color:red;font-weight:bold;">...</span> dan berikan versi yang benar dari teks yang disorot dalam bentuk petunjuk, diawali dengan '<span style="color:green;">Seharusnya: </span>' dalam tanda kurung tepat setelah teks yang disorot. Pastikan petunjuk tersebut singkat dan membantu. Pastikan bagian 'Seharusnya: [teks]' hanya menggunakan Hiragana dan Katakana, tanpa Kanji. Jika tidak ada kesalahan, tuliskan "Terjemahan Anda sangat bagus! Tidak ada kesalahan yang ditemukan."
 
-            Contoh format: 私の<span style="color:red;font-weight:bold;">名前はリオです。</span> (<span style="color:green;">Seharusnya: 私の名前はリオです</span>)
-
+            Contoh format: わたしの<span style="color:red;font-weight:bold;">なまえはリオです。</span> (<span style="color:green;">Seharusnya: わたしのなまえはリオです</span>)
             Terjemahan yang akan diperiksa:
             ${userTranslation}`;
-
             callGemini(translationPrompt, translationFeedback, translationLoadingSpinner);
         });
     </script>
