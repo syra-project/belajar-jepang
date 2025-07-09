@@ -218,8 +218,8 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
             }
 
             const essayPrompt = `Tanggapan dalam bahasa Indonesia. Periksa esai bahasa Jepang ini untuk kesalahan tata bahasa, kesalahan ejaan, dan ungkapan yang tidak wajar. Untuk setiap kesalahan, sorot dengan teks merah tebal menggunakan tag <span style="color:red;font-weight:bold;">...</span> dan berikan versi yang benar dari teks yang disorot dalam bentuk petunjuk, diawali dengan <span style="color:green;">Seharusnya: </span> dalam tanda kurung tepat setelah teks yang disorot. Pastikan petunjuk tersebut singkat dan membantu. Pastikan bagian 'Seharusnya: [teks]' hanya menggunakan Hiragana dan Katakana, tanpa Kanji. Jika tidak ada kesalahan, tuliskan "Esai Anda sangat bagus! Tidak ada kesalahan yang ditemukan."
-
-            Contoh format: 私の<span style="color:red;font-weight:bold;">名前はリオです。</span> (<span style="color:green;">Seharusnya: わたしのなまえはリオです</span>)
+            jangan pakai kanji, cukup pakai hiragana dan katakana.
+            Contoh format: わたしの<span style="color:red;font-weight:bold;">なまえはりおです。</span> (<span style="color:green;">Seharusnya: わたしのなまえはりおです</span>)
 
             Esai yang akan diperiksa:
             ${userEssay}`;
