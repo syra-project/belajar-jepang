@@ -218,9 +218,10 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
             Untuk setiap kesalahan atau ketidakakuratan, sorot dengan teks merah tebal menggunakan tag <span style="color:red;font-weight:bold;">...</span> dan berikan versi yang benar dari teks yang disorot dalam bentuk petunjuk, diawali dengan <span style="color:green;">Seharusnya: </span> dalam tanda kurung tepat setelah teks yang disorot. Pastikan petunjuk tersebut singkat dan membantu. Pastikan bagian 'Seharusnya: [teks]' hanya menggunakan Hiragana dan Katakana, tanpa Kanji.
             Jika tidak ada kesalahan sama sekali, tuliskan "Esai Anda sangat bagus! Tidak ada kesalahan yang ditemukan."
             Output HANYA teks bahasa Jepang yang diperiksa dengan koreksi yang disorot. JANGAN sertakan kalimat pembuka, kalimat penutup, penjelasan tambahan, catatan, daftar kesalahan terpisah, atau perbaikan kalimat secara terpisah. Ikuti format contoh dengan tepat.
-
+            
             Contoh format: わたしの<span style="color:red;font-weight:bold;">なまえはりおです。</span> (<span style="color:green;">Seharusnya: わたしのなまえはリオです</span>)
             Contoh kesalahan kata tambahan: わたしは<span style="color:red;font-weight:bold;">とても</span>がくせい です。 (<span style="color:green;">Seharusnya: わたしはがくせいです</span>)
+            pastikan penulisan hanya menggunakan katakana dan hiragana, jangan gunakan kanji!
             Esai yang akan diperiksa:
             ${userEssay}`;
 
@@ -243,9 +244,10 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
             Untuk setiap kesalahan atau ketidakakuratan, sorot dengan teks merah tebal menggunakan tag <span style="color:red;font-weight:bold;">...</span> dan berikan versi yang benar dari teks yang disorot dalam bentuk petunjuk, diawali dengan '<span style="color:green;">Seharusnya: </span>' dalam tanda kurung tepat setelah teks yang disorot. Pastikan petunjuk tersebut singkat dan membantu. Pastikan bagian 'Seharusnya: [teks]' hanya menggunakan Hiragana dan Katakana, tanpa Kanji.
             Jika tidak ada kesalahan sama sekali, tuliskan "<span style="color:blue;font-weight:bold;">Terjemahan Anda sangat bagus! Tidak ada kesalahan yang ditemukan.</span>"
             Output HANYA teks bahasa Jepang yang diperiksa dengan koreksi yang disorot. JANGAN sertakan kalimat pembuka, kalimat penutup, penjelasan tambahan, catatan, daftar kesalahan terpisah, atau perbaikan kalimat secara terpisah. Ikuti format contoh dengan tepat.
-            
+          
             Contoh format: わたしの<span style="color:red;font-weight:bold;">なまえはりおです。</span> (<span style="color:green;">Seharusnya: わたしのなまえはリオです</span>)
             Contoh kesalahan kata tambahan: わたしは<span style="color:red;font-weight:bold;">とても</span>がくせい です。 (<span style="color:green;">Seharusnya: わたしはがくせいです</span>)
+            pastikan penulisan hanya menggunakan katakana dan hiragana, jangan gunakan kanji!
             Terjemahan yang akan diperiksa:
             ${userTranslation}`;
 
