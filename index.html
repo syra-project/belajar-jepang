@@ -8,65 +8,39 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Gaya kustom yang tidak dapat diganti sepenuhnya oleh Tailwind */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Latar belakang biru-abu muda */
-            color: #334155; /* Warna teks lebih gelap */
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1.5rem;
-        }
-        .card {
-            background-color: #ffffff;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
-            margin-bottom: 2rem;
+            font-family: 'Inter', sans-serif; /* Menggunakan font Inter */
         }
         textarea {
-            resize: vertical;
-            min-height: 150px;
-            border-radius: 0.5rem;
-            border: 1px solid #cbd5e1; /* Abu-abu-300 */
-            padding: 0.75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #1a202c; /* Abu-abu-900 */
+            resize: vertical; /* Memungkinkan textarea untuk diubah ukurannya secara vertikal */
+            min-height: 150px; /* Tinggi minimum untuk textarea */
         }
         button {
+            /* Transisi untuk efek hover tombol */
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         button:hover {
-            transform: translateY(-2px);
+            transform: translateY(-2px); /* Efek naik sedikit saat hover */
         }
         .loading-spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #3b82f6; /* Biru-500 */
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            /* Animasi putar untuk spinner loading */
             animation: spin 1s linear infinite;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .error-text {
-            color: red;
-            font-weight: bold;
-        }
     </style>
 </head>
-<body class="p-4">
-    <div class="container">
+<body class="p-4 bg-gray-100 text-gray-700">
+    <div class="container max-w-4xl mx-auto p-6">
         <h1 class="text-4xl font-extrabold text-center text-blue-700 mb-8 rounded-lg p-4 bg-white shadow-lg">
             Aplikasi Kuis Bahasa Jepang
         </h1>
 
         <!-- Modul Terjemahan Soal Cerita -->
-        <div class="card">
+        <div class="card bg-white rounded-xl shadow-lg p-8 mb-8">
             <h2 class="text-3xl font-bold text-gray-800 mb-6">1. Terjemahan Soal Cerita (Indonesia ke Jepang)</h2>
             <p class="text-gray-600 mb-4">
                 Pilih soal cerita di bawah ini dan terjemahkan dari bahasa Indonesia ke bahasa Jepang. AI akan membantu memeriksa akurasi terjemahan dan tata bahasa Anda.
@@ -86,9 +60,9 @@
                     <!-- Teks cerita akan dimuat di sini oleh JavaScript -->
                 </p>
             </div>
-            <textarea id="translationInput" class="w-full mb-4 shadow-sm focus:ring-green-500 focus:border-green-500" placeholder="Tulis terjemahan bahasa Jepang Anda di sini..."></textarea>
+            <textarea id="translationInput" class="w-full mb-4 shadow-sm focus:ring-green-500 focus:border-green-500 rounded-lg border border-gray-300 p-3 text-base leading-normal text-gray-900" placeholder="Tulis terjemahan bahasa Jepang Anda di sini..."></textarea>
             <button id="submitTranslation" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md flex items-center justify-center">
-                <span id="translationLoadingSpinner" class="loading-spinner mr-2 hidden"></span>
+                <span id="translationLoadingSpinner" class="loading-spinner mr-2 hidden border-4 border-gray-200 border-l-blue-500 rounded-full w-6 h-6"></span>
                 Periksa Terjemahan
             </button>
 
@@ -99,7 +73,7 @@
         </div>
 
         <!-- Modul Latihan Menulis Esai -->
-        <div class="card">
+        <div class="card bg-white rounded-xl shadow-lg p-8 mb-8">
             <h2 class="text-3xl font-bold text-gray-800 mb-6">2. Latihan Menulis Esai (Bahasa Jepang)</h2>
             <p class="text-gray-600 mb-4">
                 Tulis esai singkat dalam bahasa Jepang mengenai topik di bawah ini. AI akan membantu memeriksa tata bahasa dan ejaan Anda.
@@ -108,9 +82,9 @@
                 <p class="font-semibold text-blue-800">Topik Esai:</p>
                 <p class="text-blue-700">"Ceritakan tentang aktivitas harian Anda dari pagi hingga malam."</p>
             </div>
-            <textarea id="essayInput" class="w-full mb-4 shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Tulis esai bahasa Jepang Anda di sini..."></textarea>
+            <textarea id="essayInput" class="w-full mb-4 shadow-sm focus:ring-blue-500 focus:border-blue-500 rounded-lg border border-gray-300 p-3 text-base leading-normal text-gray-900" placeholder="Tulis esai bahasa Jepang Anda di sini..."></textarea>
             <button id="submitEssay" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md flex items-center justify-center">
-                <span id="essayLoadingSpinner" class="loading-spinner mr-2 hidden"></span>
+                <span id="essayLoadingSpinner" class="loading-spinner mr-2 hidden border-4 border-gray-200 border-l-blue-500 rounded-full w-6 h-6"></span>
                 Periksa Esai
             </button>
 
@@ -122,10 +96,12 @@
     </div>
 
     <script>
-        // Kunci API Anda
-        const API_KEY = "AIzaSyDZx9O-zay8DGv4S4MLFR9R_GqGB5xQI0c"; // Kunci API Anda
+        // Kunci API OpenRouter Anda
+        // PENTING: Untuk aplikasi produksi, jangan pernah menyimpan kunci API di sisi klien seperti ini.
+        // Gunakan server backend untuk memproses permintaan API secara aman.
+        const API_KEY = "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";
 
-        // Data Cerita
+        // Data Cerita untuk modul terjemahan
         const storyData = {
             story1: `Halo! Nama saya Rio. Saya adalah seorang siswa. Setiap pagi, saya bangun jam tujuh. Saya makan roti dan minum susu. Setelah itu, saya pergi ke sekolah. Di sekolah, saya belajar bahasa Jepang dan matematika. Guru saya sangat baik dan selalu membantu kami memahami pelajaran.
 Pelajaran di sekolah biasanya berakhir pada pukul tiga sore. Setelah sekolah, saya sering pergi ke perpustakaan sekolah. Di sana, saya menghabiskan waktu untuk membaca berbagai buku menarik atau mengerjakan pekerjaan rumah yang diberikan guru. Perpustakaan adalah tempat yang tenang dan nyaman, sangat cocok untuk belajar.
@@ -137,7 +113,52 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
             story4: `Saya punya seekor anjing kecil bernama Pochi. Dia sangat aktif dan suka berlari. Setiap pagi dan sore, saya mengajaknya jalan-jalan di sekitar komplek perumahan. Pochi suka mengejar kupu-kupu dan bermain dengan anjing lain. Dia adalah teman terbaik saya dan selalu membuat saya tersenyum.`
         };
 
-        // Dapatkan elemen-elemen
+        // Jawaban hardcode untuk setiap cerita dalam bahasa Jepang (Hiragana/Katakana saja)
+        const hardcodedJapaneseAnswers = {
+            story1: `こんにちは！ わたしの なまえは リオ です。
+わたしは がくせい です。
+まいあさ、わたしは ７じに おきます。
+パンを たべて、ミルクを のみます。
+そのあと、がっこうへ いきます。
+がっこうで、わたしは にほんご や すうがくを べんきょうします。
+せんせいは とても やさしくて、いつも わたしたちが じゅぎょうを りかいできるように てつだって くれます。
+がっこうの じゅぎょうは たいてい ごご３じに おわります。
+がっこうの あと、わたしは よく がっこうの としょかんへ いきます。
+そこで、いろいろな おもしろい ほんを よんだり、せんせいに だされた しゅくだいを したり します。
+としょかんは しずかで いごこちのよい ばしょなので、べんきょうするのに ぴったりです。
+ときどき、としょかんで ともだちと あって、グループべんきょうを します。
+むずかしい ところは おたがいに おしえあいます。
+がっこうの しゅくだいが おわったら、たいてい ごご５じごろに うちへ かえります。
+いえに つくと、わたしは ねこ と あそぶのが すきです。
+わたしの ねこの なまえは クロ です。
+クロは とても かわいくて、ちいさな おもちゃを おいかけるのが すきです。
+わたしたちは よく うちの にわで はしりまわったり、いっしょに わらったり します。
+そのあと、わたしは ははと いっしょに だいどころで ゆうしょくの じゅんびを てつだいます。
+よる、ゆうしょくの あと、わたしは ほんを よみます。
+わたしは ぼうけんものの ものがたりや、かがくの ほんを よむのが だいすき です。
+ほんを よむと リラックス できて、いつも あたらしい ことを たくさん まなべます。
+ときどき、ねる まえに すこし テレビを みます。
+そして、ねて、また あしたの あたらしい いちにちに そなえます。`,
+            story2: `まいしゅうまつ、わたしは こうえんへ いくのが すきです。
+わたしは よく ほんを もっていって、おおきな きの したで よみます。
+ときどき、こどもたちが サッカーを したり、かぞくが ピクニックを したり しているのを みます。
+しんせんな くうきと みどりの けしきは わたしを おちつかせます。
+ゆうがた、わたしは かえる まえに いどうはんばいしゃから アイスクリームを かいます。`,
+            story3: `まえの なつやすみ、わたしは かぞくと いっしょに きょうとを おとずれました。
+わたしたちは しんかんせんに のりました。
+きょうとで、わたしたちは たくさんの ふるい おてらと うつくしい にわを おとずれました。
+きんかくじの きんの ろうかくは とても いんしょうてきでした。
+わたしたちは ラーメンや たこやきのような おいしい ちほうりょうりも ためしました。
+それは わすれられない けいけん でした。`,
+            story4: `わたしには ポチという ちいさい いぬが います。
+かれは とても かっぱつで、はしるのが すきです。
+まいあさ、まいゆう、わたしは かれを じゅうたくちの まわりを さんぽに つれていきます。
+ポチは ちょうちょを おいかけたり、ほかの いぬと あそんだりするのが すきです。
+かれは わたしの さいこうの ともだちで、いつも わたしを えがおに してくれます。`
+        };
+
+
+        // Dapatkan elemen-elemen DOM
         const essayInput = document.getElementById('essayInput');
         const submitEssayButton = document.getElementById('submitEssay');
         const essayFeedback = document.getElementById('essayFeedback');
@@ -150,14 +171,14 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
         const translationFeedback = document.getElementById('translationFeedback');
         const translationLoadingSpinner = document.getElementById('translationLoadingSpinner');
 
-        // Fungsi untuk memuat cerita yang dipilih
+        // Fungsi untuk memuat cerita yang dipilih ke dalam tampilan
         function loadStory(storyKey) {
             storyTextDisplay.innerText = storyData[storyKey];
             translationInput.value = ''; // Hapus input terjemahan saat mengganti cerita
             translationFeedback.innerHTML = '<p class="text-gray-500">Hasil verifikasi terjemahan akan ditampilkan di sini.</p>'; // Hapus umpan balik
         }
 
-        // Muat cerita awal
+        // Muat cerita awal saat halaman dimuat
         loadStory(storySelector.value);
 
         // Event listener untuk perubahan pilihan cerita
@@ -165,38 +186,50 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
             loadStory(event.target.value);
         });
 
-        // Fungsi untuk memanggil Gemini API
+        // Fungsi untuk memanggil OpenRouter API
         async function callGemini(prompt, targetElement, loadingSpinner) {
+            // Tampilkan spinner loading dan pesan
             loadingSpinner.classList.remove('hidden');
             targetElement.innerHTML = '<p class="text-gray-500">Memeriksa jawaban Anda dengan AI...</p>';
             targetElement.classList.add('animate-pulse'); // Tambahkan animasi berkedip
 
-            let chatHistory = [];
-            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-            const payload = { contents: chatHistory };
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+            // Payload untuk permintaan OpenRouter
+            const payload = {
+                // Model yang digunakan dari OpenRouter.
+                model: "deepseek/deepseek-chat-v3-0324:free",
+                messages: [{ role: "user", content: prompt }] // Format pesan untuk API chat completions
+            };
+
+            // Endpoint OpenRouter
+            const apiUrl = `https://openrouter.ai/api/v1/chat/completions`;
 
             try {
                 const response = await fetch(apiUrl, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${API_KEY}`, // Menggunakan kunci API dengan skema Bearer
+                        // Penting untuk OpenRouter: Ganti 'http://localhost:8000' dengan URL domain aplikasi Anda
+                        // jika Anda meng-host-nya di tempat lain (misalnya, 'https://aplikasikuisjepang.com').
+                        'HTTP-Referer': 'http://localhost:8000',
+                        'X-Title': 'Aplikasi Kuis Bahasa Jepang' // Nama aplikasi Anda
+                    },
                     body: JSON.stringify(payload)
                 });
 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    console.error('Gemini API Error:', errorData);
+                    console.error('OpenRouter API Error:', errorData);
                     targetElement.innerHTML = `<p class="text-red-600">Terjadi kesalahan saat menghubungi AI: ${errorData.error.message || 'Unknown error'}. Silakan coba lagi.</p>`;
                     return;
                 }
 
                 const result = await response.json();
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    const text = result.candidates[0].content.parts[0].text;
-                    // Bersihkan dan tampilkan konten HTML
-                    targetElement.innerHTML = text;
+                // Parsing respons dari OpenRouter (struktur berbeda dari Gemini langsung)
+                if (result.choices && result.choices.length > 0 &&
+                    result.choices[0].message && result.choices[0].message.content) {
+                    const text = result.choices[0].message.content;
+                    targetElement.innerHTML = text; // Tampilkan hasil AI
                 } else {
                     targetElement.innerHTML = '<p class="text-red-600">Tidak dapat memproses jawaban Anda. Respons AI tidak valid.</p>';
                 }
@@ -204,8 +237,9 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
                 console.error('Kesalahan pengambilan:', error);
                 targetElement.innerHTML = `<p class="text-red-600">Terjadi kesalahan jaringan atau server: ${error.message}. Silakan coba lagi.</p>`;
             } finally {
+                // Sembunyikan spinner dan hapus animasi setelah selesai
                 loadingSpinner.classList.add('hidden');
-                targetElement.classList.remove('animate-pulse'); // Hapus animasi berkedip
+                targetElement.classList.remove('animate-pulse');
             }
         }
 
@@ -217,10 +251,15 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
                 return;
             }
 
-            const essayPrompt = `Tanggapan dalam bahasa Indonesia. Periksa esai bahasa Jepang ini untuk kesalahan tata bahasa, kesalahan ejaan, dan ungkapan yang tidak wajar. Untuk setiap kesalahan, sorot dengan teks merah tebal menggunakan tag <span style="color:red;font-weight:bold;">...</span> dan berikan versi yang benar dari teks yang disorot dalam bentuk petunjuk, diawali dengan <span style="color:green;">Seharusnya: </span> dalam tanda kurung tepat setelah teks yang disorot. Pastikan petunjuk tersebut singkat dan membantu. Pastikan bagian 'Seharusnya: [teks]' hanya menggunakan Hiragana dan Katakana, tanpa Kanji. Jika tidak ada kesalahan, tuliskan "Esai Anda sangat bagus! Tidak ada kesalahan yang ditemukan."
-            jangan pakai kanji, cukup pakai hiragana dan katakana.
-            Contoh format: わたしの<span style="color:red;font-weight:bold;">なまえはりおです。</span> (<span style="color:green;">Seharusnya: わたしのなまえはりおです</span>)
+            // Prompt untuk memeriksa esai bahasa Jepang
+            const essayPrompt = `Tanggapan dalam bahasa Indonesia. Periksa esai bahasa Jepang ini untuk kesalahan tata bahasa, kesalahan ejaan, dan ungkapan yang tidak wajar.
+            PENTING: Jika ada kata tambahan, kata yang hilang, atau ketidakakuratan lainnya yang membuat esai TIDAK SAMA persis dengan esai yang benar, itu HARUS disorot sebagai kesalahan.
+            Untuk setiap kesalahan atau ketidakakuratan, sorot dengan teks merah tebal menggunakan tag <span style="color:red;font-weight:bold;">...</span> dan berikan versi yang benar dari teks yang disorot dalam bentuk petunjuk, diawali dengan <span style="color:green;">Seharusnya: </span> dalam tanda kurung tepat setelah teks yang disorot. Pastikan petunjuk tersebut singkat dan membantu. Pastikan bagian 'Seharusnya: [teks]' hanya menggunakan Hiragana dan Katakana, tanpa Kanji.
+            Jika tidak ada kesalahan sama sekali, tuliskan "Esai Anda sangat bagus! Tidak ada kesalahan yang ditemukan."
+            Output HANYA teks bahasa Jepang yang diperiksa dengan koreksi yang disorot. JANGAN sertakan kalimat pembuka, kalimat penutup, penjelasan tambahan, catatan, daftar kesalahan terpisah, atau perbaikan kalimat secara terpisah. Ikuti format contoh dengan tepat.
 
+            Contoh format: わたしの<span style="color:red;font-weight:bold;">なまえはりおです。</span> (<span style="color:green;">Seharusnya: わたしのなまえはリオです</span>)
+            Contoh kesalahan kata tambahan: わたしは<span style="color:red;font-weight:bold;">とても</span>がくせい です。 (<span style="color:green;">Seharusnya: わたしはがくせいです</span>)
             Esai yang akan diperiksa:
             ${userEssay}`;
 
@@ -235,13 +274,31 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
                 return;
             }
 
+            const currentStoryKey = storySelector.value;
+            const correctJapaneseAnswer = hardcodedJapaneseAnswers[currentStoryKey].trim();
+            
+            // Normalisasi spasi dan baris baru untuk perbandingan yang lebih baik
+            const normalizeText = (text) => text.replace(/\s+/g, ' ').trim();
+
+            if (normalizeText(userTranslation) === normalizeText(correctJapaneseAnswer)) {
+                translationFeedback.innerHTML = '<span style="color:blue;font-weight:bold;">Terjemahan Anda sangat bagus! Tidak ada kesalahan yang ditemukan.</span>';
+                return; // Hentikan eksekusi jika jawaban benar
+            }
+
             const currentStoryText = storyTextDisplay.innerText; // Dapatkan teks cerita yang sedang ditampilkan
 
-            const translationPrompt = `Berikut adalah sebuah cerita dalam bahasa Indonesia:\n\n${currentStoryText}\n\nBerikut adalah terjemahan cerita tersebut dalam bahasa Jepang:\n\n${userTranslation}\n\nPeriksa terjemahan bahasa Jepang ini untuk keakuratan, kesalahan tata bahasa, kesalahan ejaan, dan ungkapan yang tidak wajar dibandingkan dengan teks asli dalam bahasa Indonesia. Untuk setiap kesalahan atau ketidakakuratan, sorot dengan teks merah tebal menggunakan tag <span style="color:red;font-weight:bold;">...</span> dan berikan versi yang benar dari teks yang disorot dalam bentuk petunjuk, diawali dengan '<span style="color:green;">Seharusnya: </span>' dalam tanda kurung tepat setelah teks yang disorot. Pastikan petunjuk tersebut singkat dan membantu. Pastikan bagian 'Seharusnya: [teks]' hanya menggunakan Hiragana dan Katakana, tanpa Kanji. Jika tidak ada kesalahan, tuliskan "Terjemahan Anda sangat bagus! Tidak ada kesalahan yang ditemukan."
-
-            Contoh format: わたしの<span style="color:red;font-weight:bold;">なまえはリオです。</span> (<span style="color:green;">Seharusnya: わたしのなまえはリオです</span>)
+            // Prompt untuk memeriksa terjemahan bahasa Jepang
+            const translationPrompt = `Berikut adalah sebuah cerita dalam bahasa Indonesia:\n\n${currentStoryText}\n\nBerikut adalah terjemahan cerita tersebut dalam bahasa Jepang:\n\n${userTranslation}\n\nPeriksa terjemahan bahasa Jepang ini untuk keakuratan, kesalahan tata bahasa, kesalahan ejaan, dan ungkapan yang tidak wajar dibandingkan dengan teks asli dalam bahasa Indonesia.
+            PENTING: Jika ada kata tambahan, kata yang hilang, atau ketidakakuratan lainnya (termasuk kata yang tidak relevan atau tidak ada dalam terjemahan yang benar) yang membuat terjemahan TIDAK SAMA persis dengan terjemahan yang benar, itu HARUS disorot sebagai kesalahan.
+            Untuk setiap kesalahan atau ketidakakuratan, sorot dengan teks merah tebal menggunakan tag <span style="color:red;font-weight:bold;">...</span> dan berikan versi yang benar dari teks yang disorot dalam bentuk petunjuk, diawali dengan '<span style="color:green;">Seharusnya: </span>' dalam tanda kurung tepat setelah teks yang disorot. Pastikan petunjuk tersebut singkat dan membantu. Pastikan bagian 'Seharusnya: [teks]' hanya menggunakan Hiragana dan Katakana, tanpa Kanji.
+            Jika tidak ada kesalahan sama sekali, tuliskan "<span style="color:blue;font-weight:bold;">Terjemahan Anda sangat bagus! Tidak ada kesalahan yang ditemukan.</span>"
+            Output HANYA teks bahasa Jepang yang diperiksa dengan koreksi yang disorot. JANGAN sertakan kalimat pembuka, kalimat penutup, penjelasan tambahan, catatan, daftar kesalahan terpisah, atau perbaikan kalimat secara terpisah. Ikuti format contoh dengan tepat.
+            
+            Contoh format: わたしの<span style="color:red;font-weight:bold;">なまえはりおです。</span> (<span style="color:green;">Seharusnya: わたしのなまえはリオです</span>)
+            Contoh kesalahan kata tambahan: わたしは<span style="color:red;font-weight:bold;">とても</span>がくせい です。 (<span style="color:green;">Seharusnya: わたしはがくせいです</span>)
             Terjemahan yang akan diperiksa:
             ${userTranslation}`;
+
             callGemini(translationPrompt, translationFeedback, translationLoadingSpinner);
         });
     </script>
