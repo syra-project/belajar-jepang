@@ -99,7 +99,7 @@
         // Kunci API OpenRouter Anda
         // PENTING: Untuk aplikasi produksi, jangan pernah menyimpan kunci API di sisi klien seperti ini.
         // Gunakan server backend untuk memproses permintaan API secara aman.
-        const API_KEY = "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";
+        const API_KEY = "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";
 
         // Data Cerita untuk modul terjemahan
         const storyData = {
@@ -225,9 +225,8 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${API_KEY}`, // Menggunakan kunci API dengan skema Bearer
-                        // Penting untuk OpenRouter: Ganti 'http://localhost:8000' dengan URL domain aplikasi Anda
-                        // jika Anda meng-host-nya di tempat lain (misalnya, 'https://aplikasikuisjepang.com').
-                        'HTTP-Referer': 'http://localhost:8000',
+                        // PENTING: Mengubah HTTP-Referer agar sesuai dengan URL GitHub Pages Anda
+                        'HTTP-Referer': 'https://syra-project.github.io/belajar-jepang/', 
                         'X-Title': 'Aplikasi Kuis Bahasa Jepang' // Nama aplikasi Anda
                     },
                     body: JSON.stringify(payload)
@@ -238,7 +237,7 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
                     console.error('OpenRouter API Error:', errorData);
                     // Pesan kesalahan yang lebih spesifik untuk 401
                     if (response.status === 401) {
-                        targetElement.innerHTML = `<p class="text-red-600">Terjadi kesalahan otentikasi (Kode 401): Mohon periksa kembali kunci API OpenRouter Anda. Pastikan sudah benar dan aktif.</p>`;
+                        targetElement.innerHTML = `<p class="text-red-600">Terjadi kesalahan otentikasi (Kode 401): Mohon periksa kembali kunci API OpenRouter Anda. Pastikan sudah benar dan aktif. Juga, pastikan URL 'HTTP-Referer' di kode JavaScript cocok dengan domain hosting Anda (${window.location.origin}).</p>`;
                     } else {
                         targetElement.innerHTML = `<p class="text-red-600">Terjadi kesalahan saat menghubungi AI: ${errorData.error.message || 'Unknown error'}. Silakan coba lagi.</p>`;
                     }
