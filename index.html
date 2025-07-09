@@ -96,10 +96,10 @@
     </div>
 
     <script>
-        // Kunci API OpenRouter Anda
+        // Kunci API Gemini Anda
         // PENTING: Untuk aplikasi produksi, jangan pernah menyimpan kunci API di sisi klien seperti ini.
         // Gunakan server backend untuk memproses permintaan API secara aman.
-        const API_KEY = "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";
+        const API_KEY = "AIzaSyDLc31fwoDMh7yZXWPMD49c6iCT1kqKcoA"; // Kunci API Gemini yang Anda berikan
 
         // Data Cerita untuk modul terjemahan
         const storyData = {
@@ -108,66 +108,16 @@ Pelajaran di sekolah biasanya berakhir pada pukul tiga sore. Setelah sekolah, sa
 Kadang-kadang, saya juga bertemu teman-teman saya di perpustakaan untuk belajar kelompok. Kami saling membantu jika ada materi yang sulit. Setelah selesai dengan tugas sekolah, saya pun pulang ke rumah, biasanya sekitar pukul lima sore.
 Sesampainya di rumah, saya suka bermain dengan kucing saya. Kucing saya namanya Kuro. Dia sangat lucu dan suka mengejar mainan kecil. Kami sering bermain di taman belakang rumah, berlarian dan tertawa bersama. Setelah itu, saya membantu ibu menyiapkan makan malam di dapur.
 Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buku cerita petualangan dan buku tentang sains. Membaca membuat saya merasa rileks dan saya selalu belajar banyak hal baru dari setiap halaman. Terkadang, saya juga menonton televisi sebentar sebelum tidur. Lalu, saya tidur, siap untuk hari yang baru besok.`,
-            story2: `まいしゅうまつ、わたしは こうえんへ いくのが すきです。
-わたしは よく ほんを もっていって、おおきな きの したで よみます。
-ときどき、こどもたちが サッカーを したり、かぞくが ピクニックを したり しているのを みます。
-しんせんな くうきと みどりの けしきは わたしを おちつかせます。
-ゆうがた、わたしは かえる まえに いどうはんばいしゃから アイスクリームを かいます。`,
-            story3: `まえの なつやすみ、わたしは かぞくと いっしょに きょうとを おとずれました。
-わたしたちは しんかんせんに のりました。
-きょうとで、わたしたちは たくさんの ふるい おてらと うつくしい にわを おとずれました。
-きんかくじの きんの ろうかくは とても いんしょうてきでした。
-わたしたちは ラーメンや たこやきのような おいしい ちほうりょうりも ためしました。
-それは わすれられない けいけん でした。`,
-            story4: `わたしには ポチという ちいさい いぬが います。
-かれは とても かっぱつで、はしるのが すきです。
-まいあさ、まいゆう、わたしは かれを じゅうたくちの まわりを さんぽに つれていきます。
-ポチは ちょうちょを おいかけたり、ほかの いぬと あそんだりするのが すきです。
-かれは わたしの さいこうの ともだちで、いつも わたしを えがおに してくれます。`
+            story2: `Setiap akhir pekan, saya suka pergi ke taman kota. Saya sering membawa buku dan membaca di bawah pohon besar. Kadang-kadang, saya melihat anak-anak bermain sepak bola atau keluarga piknik. Udara segar dan pemandangan hijau membuat saya merasa tenang. Sore hari, saya membeli es krim dari penjual keliling sebelum pulang.`,
+            story3: `Liburan musim panas lalu, saya mengunjungi Kyoto bersama keluarga. Kami naik kereta cepat Shinkansen. Di Kyoto, kami mengunjungi banyak kuil kuno dan taman yang indah. Kuil Kinkaku-ji dengan paviliun emasnya sangat mengesankan. Kami juga mencoba makanan lokal yang lezat seperti ramen dan takoyaki. Itu adalah pengalaman yang tak terlupakan.`,
+            story4: `Saya punya seekor anjing kecil bernama Pochi. Dia sangat aktif dan suka berlari. Setiap pagi dan sore, saya mengajaknya jalan-jalan di sekitar komplek perumahan. Pochi suka mengejar kupu-kupu dan bermain dengan anjing lain. Dia adalah teman terbaik saya dan selalu membuat saya tersenyum.`
         };
 
         // Jawaban hardcode untuk setiap cerita dalam bahasa Jepang (Hiragana/Katakana saja)
+        // Objek ini sekarang kosong karena jawaban tidak lagi di-hardcode
         const hardcodedJapaneseAnswers = {
-            story1: `こんにちは！ わたしの なまえは リオ です。
-わたしは がくせい です。
-まいあさ、わたしは ７じに おきます。
-パンを たべて、ミルクを のみます。
-そのあと、がっこうへ いきます。
-がっこうで、わたしは にほんご や すうがくを べんきょうします。
-せんせいは とても やさしくて、いつも わたしたちが じゅぎょうを りかいできるように てつだって くれます。
-がっこうの じゅぎょうは たいてい ごご３じに おわります。
-がっこうの あと、わたしは よく がっこうの としょかんへ いきます。
-そこで、いろいろな おもしろい ほんを よんだり、せんせいに だされた しゅくだいを したり します。
-としょかんは しずかで いごこちのよい ばしょなので、べんきょうするのに ぴったりです。
-ときどき、としょかんで ともだちと あって、グループべんきょうを します。
-むずかしい ところは おたがいに おしえあいます。
-がっこうの しゅくだいが おわったら、たいてい ごご５じごろに うちへ かえります。
-いえに つくと、わたしは ねこ と あそぶのが すきです。
-わたしの ねこの なまえは クロ です。
-クロは とても かわいくて、ちいさな おもちゃを おいかけるのが すきです。
-わたしたちは よく うちの にわで はしりまわったり、いっしょに わらったり します。
-そのあと、わたしは ははと いっしょに だいどころで ゆうしょくの じゅんびを てつだいます。
-よる、ゆうしょくの あと、わたしは ほんを よみます。
-わたしは ぼうけんものの ものがたりや、かがくの ほんを よむのが だいすき です。
-ほんを よむと リラックス できて、いつも あたらしい ことを たくさん まなべます。
-ときどき、ねる まえに すこし テレビを みます。
-そして、ねて、また あしたの あたらしい いちにちに そなえます。`,
-            story2: `まいしゅうまつ、わたしは こうえんへ いくのが すきです。
-わたしは よく ほんを もっていって、おおきな きの したで よみます。
-ときどき、こどもたちが サッカーを したり、かぞくが ピクニックを したり しているのを みます。
-しんせんな くうきと みどりの けしきは わたしを おちつかせます。
-ゆうがた、わたしは かえる まえに いどうはんばいしゃから アイスクリームを かいます。`,
-            story3: `まえの なつやすみ、わたしは かぞくと いっしょに きょうとを おとずれました。
-わたしたちは しんかんせんに のりました。
-きょうとで、わたしたちは たくさんの ふるい おてらと うつくしい にわを おとずれました。
-きんかくじの きんの ろうかくは とても いんしょうてきでした。
-わたしたちは ラーメンや たこやきのような おいしい ちほうりょうりも ためしました。
-それは わすれられない けいけん でした。`,
-            story4: `わたしには ポチという ちいさい いぬが います。
-かれは とても かっぱつで、はしるのが すきです。
-まいあさ、まいゆう、わたしは かれを じゅうたくちの まわりを さんぽに つれていきます。
-ポチは ちょうちょを おいかけたり、ほかの いぬと あそんだりするのが すきです。
-かれは わたしの さいこうの ともだちで、いつも わたしを えがおに してくれます。`
+            // Jawaban tidak lagi di-hardcode di sini.
+            // Semua pemeriksaan terjemahan akan dilakukan oleh AI.
         };
 
 
@@ -199,22 +149,20 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
             loadStory(event.target.value);
         });
 
-        // Fungsi untuk memanggil OpenRouter API
+        // Fungsi untuk memanggil Gemini API
         async function callGemini(prompt, targetElement, loadingSpinner) {
             // Tampilkan spinner loading dan pesan
             loadingSpinner.classList.remove('hidden');
             targetElement.innerHTML = '<p class="text-gray-500">Memeriksa jawaban Anda dengan AI...</p>';
             targetElement.classList.add('animate-pulse'); // Tambahkan animasi berkedip
 
-            // Payload untuk permintaan OpenRouter
-            const payload = {
-                // Model yang digunakan dari OpenRouter.
-                model: "deepseek/deepseek-chat-v3-0324:free",
-                messages: [{ role: "user", content: prompt }] // Format pesan untuk API chat completions
-            };
+            // Payload untuk permintaan Gemini API
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = { contents: chatHistory };
 
-            // Endpoint OpenRouter
-            const apiUrl = `https://openrouter.ai/api/v1/chat/completions`;
+            // Endpoint Gemini API
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
             try {
                 // Log API Key for debugging purposes (remove in production)
@@ -224,31 +172,24 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${API_KEY}`, // Menggunakan kunci API dengan skema Bearer
-                        // PENTING: Mengubah HTTP-Referer agar sesuai dengan URL GitHub Pages Anda
-                        'HTTP-Referer': 'https://syra-project.github.io/belajar-jepang/', 
-                        'X-Title': 'Aplikasi Kuis Bahasa Jepang' // Nama aplikasi Anda
                     },
                     body: JSON.stringify(payload)
                 });
 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    console.error('OpenRouter API Error:', errorData);
-                    // Pesan kesalahan yang lebih spesifik untuk 401
-                    if (response.status === 401) {
-                        targetElement.innerHTML = `<p class="text-red-600">Terjadi kesalahan otentikasi (Kode 401): Mohon periksa kembali kunci API OpenRouter Anda. Pastikan sudah benar dan aktif. Juga, pastikan URL 'HTTP-Referer' di kode JavaScript cocok dengan domain hosting Anda (${window.location.origin}).</p>`;
-                    } else {
-                        targetElement.innerHTML = `<p class="text-red-600">Terjadi kesalahan saat menghubungi AI: ${errorData.error.message || 'Unknown error'}. Silakan coba lagi.</p>`;
-                    }
+                    console.error('Gemini API Error:', errorData);
+                    // Pesan kesalahan yang lebih spesifik
+                    targetElement.innerHTML = `<p class="text-red-600">Terjadi kesalahan saat menghubungi AI: ${errorData.error.message || 'Unknown error'}. Silakan coba lagi.</p>`;
                     return;
                 }
 
                 const result = await response.json();
-                // Parsing respons dari OpenRouter (struktur berbeda dari Gemini langsung)
-                if (result.choices && result.choices.length > 0 &&
-                    result.choices[0].message && result.choices[0].message.content) {
-                    const text = result.choices[0].message.content;
+                // Parsing respons dari Gemini API
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
                     targetElement.innerHTML = text; // Tampilkan hasil AI
                 } else {
                     targetElement.innerHTML = '<p class="text-red-600">Tidak dapat memproses jawaban Anda. Respons AI tidak valid.</p>';
@@ -292,18 +233,6 @@ Malam hari, setelah makan malam, saya membaca buku. Saya sangat suka membaca buk
             if (userTranslation === "") {
                 translationFeedback.innerHTML = '<p class="text-red-600">Mohon tulis terjemahan Anda terlebih dahulu.</p>';
                 return;
-            }
-
-            const currentStoryKey = storySelector.value;
-            const correctJapaneseAnswer = hardcodedJapaneseAnswers[currentStoryKey].trim();
-            
-            // Normalisasi spasi dan baris baru untuk perbandingan yang lebih baik
-            const normalizeText = (text) => text.replace(/\s+/g, ' ').trim();
-
-            // Periksa apakah jawaban siswa sama persis dengan jawaban hardcode
-            if (normalizeText(userTranslation) === normalizeText(correctJapaneseAnswer)) {
-                translationFeedback.innerHTML = '<span style="color:blue;font-weight:bold;">Terjemahan Anda sangat bagus! Tidak ada kesalahan yang ditemukan.</span>';
-                return; // Hentikan eksekusi jika jawaban benar
             }
 
             const currentStoryText = storyTextDisplay.innerText; // Dapatkan teks cerita yang sedang ditampilkan
